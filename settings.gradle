@@ -1,3 +1,4 @@
+include ':lintlibrary'
 include ':lint'
 include ':app'
 rootProject.name = "live-lint"

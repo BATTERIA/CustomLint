@@ -1,13 +1,15 @@
 apply plugin: 'java-library'
 apply plugin: 'kotlin'
 
+def lint_version = '27.0.1'
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'com.android.tools.lint:lint-api:26.4.2'
-    implementation 'com.android.tools.lint:lint-gradle:26.4.2'
-    implementation 'com.android.tools.lint:lint:26.4.2'
-    implementation 'com.android.tools.lint:lint-tests:26.4.2'
+    compileOnly "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    compileOnly 'com.android.tools.lint:lint-api:' + lint_version
+    compileOnly 'com.android.tools.lint:lint-gradle:' + lint_version
+    compileOnly 'com.android.tools.lint:lint:' + lint_version
+    testImplementation 'com.android.tools.lint:lint-tests:' + lint_version
 }
 
 jar {
@@ -17,6 +19,3 @@ jar {
         attributes("Lint-Registry": "com.bilibili.bililive.CustomIssueRegistry")
     }
 }
-
-sourceCompatibility = "1.7"
-targetCompatibility = "1.7"

@@ -40,6 +40,6 @@ class CommonBean {
         StringBuilder().append(1)
         Toast(null).show()
 
-        Color.parseColor("")
+        Color.parseColor("123")
     }
 }
