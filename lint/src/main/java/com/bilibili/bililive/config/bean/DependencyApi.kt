@@ -3,7 +3,7 @@ package com.bilibili.bililive.config.bean
 import com.google.gson.annotations.SerializedName
 
 /**
- *User: yaobeihaoyu
+ * User: yaobeihaoyu
  * Date: 2020/6/17
  * Time: 4:12 PM
  */

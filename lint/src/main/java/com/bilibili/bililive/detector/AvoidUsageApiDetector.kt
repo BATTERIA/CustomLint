@@ -4,17 +4,17 @@ import com.android.tools.lint.client.api.UElementHandler
 import com.android.tools.lint.detector.api.*
 import com.bilibili.bililive.config.ConfigParser
 import com.bilibili.bililive.config.LintConfig
-import com.bilibili.bililive.LintMatcher
+import com.bilibili.bililive.utils.LintMatcher
 import org.jetbrains.uast.UCallExpression
 import org.jetbrains.uast.UClass
 import org.jetbrains.uast.UElement
 import org.jetbrains.uast.util.isConstructorCall
 import org.jetbrains.uast.util.isMethodCall
-import com.bilibili.bililive.report
+import com.bilibili.bililive.utils.report
 
 /**
  * 避免使用api检测器（目前可以检测方法调用、类创建、实现或者继承）
- *User: yaobeihaoyu
+ * User: yaobeihaoyu
  * Date: 2020/6/9
  * Time: 4:35 PM
  */

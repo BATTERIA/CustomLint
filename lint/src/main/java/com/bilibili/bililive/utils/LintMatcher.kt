@@ -1,4 +1,4 @@
-package com.bilibili.bililive
+package com.bilibili.bililive.utils
 
 import com.intellij.psi.PsiClass
 import com.bilibili.bililive.config.bean.BaseConfigProperty
@@ -10,7 +10,7 @@ import java.util.regex.Pattern
 
 /**
  * lint 名字匹配器
- *User: yaobeihaoyu
+ * User: yaobeihaoyu
  * Date: 2020/6/12
  * Time: 4:38 PM
  */

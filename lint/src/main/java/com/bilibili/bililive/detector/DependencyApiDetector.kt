@@ -4,12 +4,10 @@ import com.android.tools.lint.client.api.UElementHandler
 import com.android.tools.lint.detector.api.*
 import com.bilibili.bililive.config.ConfigParser
 import com.bilibili.bililive.config.LintConfig
-import com.bilibili.bililive.LintMatcher
 import com.bilibili.bililive.config.bean.DependencyApi
-import com.bilibili.bililive.getQualifiedName
+import com.bilibili.bililive.utils.*
 import org.jetbrains.uast.*
 import org.jetbrains.uast.visitor.AbstractUastVisitor
-import com.bilibili.bililive.report
 
 /**
  * 有依赖关系api
@@ -17,15 +15,16 @@ import com.bilibili.bililive.report
  * 如果满足开始条件则检查[DependencyApi.triggerMethod]后面的方法，
  * 有没有调用[DependencyApi.dependencyMethod]方法如果没调用则report。
  *
- * 警告：⚠️目前只能检查[DependencyApi.triggerMethod]在方法中被调用的情况，
- * 其次由于无法区分类的实例，如果同一个方法中后面有其他的实例调用了
- * [DependencyApi.dependencyMethod]也会认为当前实例调用了依赖方法，不在report（目前没找到解决办法😂）
+ * 警告：⚠️目前只能检查[DependencyApi.triggerMethod]在类中被调用的情况
+ * 1、如果在一个类中调用了[DependencyApi.triggerMethod]，在另一个类中调用[DependencyApi.dependencyMethod]无法分析
+ * 2、如果[DependencyApi.dependencyMethod]由实例的另一个引用调用则无法分析
+ * 3、无法确认[DependencyApi.dependencyMethod]是否真的会被调用，只能说是写了
  *
- *User: yaobeihaoyu
+ * User: yaobeihaoyu
  * Date: 2020/6/16
  * Time: 10:09 AM
  */
-class DependencyApiDetector : BaseDetector(), Detector.UastScanner {
+class DependencyApiDetector : BaseDetector(), Detector.UastScanner, Logger {
     companion object {
         private const val REPORT_MESSAGE =
             "使用${LintConfig.CONFIG_FILE_NAME}中${ConfigParser.KEY_DEPENDENCY_API}配置的api时必须调用dependencyMethod方法"
@@ -53,15 +52,24 @@ class DependencyApiDetector : BaseDetector(), Detector.UastScanner {
                     LintMatcher.match(null, it.triggerMethod, node.getQualifiedName())
                 } ?: return
 
-                //拿到外层方法
-                val outMethod =
-                    node.getParentOfType<UAnnotationMethod>(UAnnotationMethod::class.java, true)
+                // 拿到方法调用对象名
+                val objectName = node.getReferenceObjectName()
+                if (objectName.isEmpty()) logError("can't get object's name")
+                logInfo("found triggerMethod(${dependencyApi.triggerMethod}) and object's name is $objectName")
+
+                // 拿到外层类
+                val outClass =
+                    node.getParentOfType<UClass>(UClass::class.java, true)
                         ?: return
-                val dependencyApiFinder = DependencyApiFinder(node, dependencyApi)
-                outMethod.accept(dependencyApiFinder)//检查outMethod内是否有调用dependency_method
+
+                val dependencyApiFinder = DependencyApiFinder(dependencyApi, objectName)
+                outClass.accept(dependencyApiFinder)//检查outMethod内是否有调用dependency_method
+
                 if (dependencyApiFinder.isFound()) {
+                    logInfo("found dependencyMethod(${dependencyApi.dependencyMethod}) and object's name is $objectName")
                     return
                 }
+                logError("调用${dependencyApi.triggerMethod}后必须调用${dependencyApi.dependencyMethod}方法")
                 context.report(ISSUE, context.getLocation(node), dependencyApi)
             }
 
@@ -70,21 +78,16 @@ class DependencyApiDetector : BaseDetector(), Detector.UastScanner {
 
 
     class DependencyApiFinder(
-        private val target: UCallExpression,
-        private val dependencyApi: DependencyApi
-    ) : AbstractUastVisitor() {
+        private val dependencyApi: DependencyApi,
+        private val objectName: String
+    ) : AbstractUastVisitor(), Logger {
+        override val tag = "DependencyApiFinder"
 
-        private var seenTarget = false
         private var found = false
 
         override fun visitCallExpression(node: UCallExpression): Boolean {
-            if (target == node) {
-                seenTarget = true
-                return super.visitCallExpression(node)
-            }
-            if (seenTarget &&
-                LintMatcher.match(null, dependencyApi.dependencyMethod, node.getQualifiedName())
-            ) {
+            if (LintMatcher.match(null, dependencyApi.dependencyMethod, node.getQualifiedName())
+                && node.getReferenceObjectName() == objectName) {
                 found = true
             }
             return super.visitCallExpression(node)
@@ -92,4 +95,7 @@ class DependencyApiDetector : BaseDetector(), Detector.UastScanner {
 
         fun isFound() = found
     }
+
+    override val tag: String
+        get() = "DependencyApiDetector"
 }

@@ -1,15 +1,15 @@
 package com.bilibili.bililive.detector
 
 import com.android.tools.lint.detector.api.*
-import com.bilibili.bililive.CLASS_SERIALIZABLE
-import com.bilibili.bililive.LintMatcher
+import com.bilibili.bililive.utils.CLASS_SERIALIZABLE
+import com.bilibili.bililive.utils.LintMatcher
 import com.intellij.psi.PsiClassType
 import org.jetbrains.uast.UClass
-import com.bilibili.bililive.report
+import com.bilibili.bililive.utils.report
 
 /**
  * 实现了Serializable接口的类，引用类型成员变量也必须要实现Serializable接口
- *User: yaobeihaoyu
+ * User: yaobeihaoyu
  * Date: 2020/10/27
  * Time: 4:57 PM
  */

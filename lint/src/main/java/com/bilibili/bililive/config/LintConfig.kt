@@ -1,11 +1,10 @@
 package com.bilibili.bililive.config
 
 import com.android.tools.lint.detector.api.Context
-import java.io.File
 
 /**
  * 读取配置信息类
- *User: yaobeihaoyu
+ * User: yaobeihaoyu
  * Date: 2020/10/27
  * Time: 4:10 PM
  */

@@ -2,6 +2,8 @@ apply plugin: 'java-library'
 apply plugin: 'kotlin'
 
 def lint_version = '27.0.1'
+//def lint_version = '26.4.2'
+//def lint_version = '26.5.3'
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -19,3 +21,6 @@ jar {
         attributes("Lint-Registry": "com.bilibili.bililive.CustomIssueRegistry")
     }
 }
+
+sourceCompatibility = "1.7"
+targetCompatibility = "1.7"

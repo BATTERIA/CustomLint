@@ -34,7 +34,7 @@ class CommonBean {
         a.start()
         val b = ObjectAnimator.ofInt(1, 3)
         b.start()
-        b.cancel()
+        ObjectAnimator.ofInt(1, 3).start()
         val sb: StringBuilder = StringBuilder()
         sb.append(1)
         StringBuilder().append(1)
@@ -42,4 +42,25 @@ class CommonBean {
 
         Color.parseColor("123")
     }
+
+    fun a() {
+        ObjectAnimator.ofInt(1, 3).start()
+        val a: Animator = ObjectAnimator.ofInt(1, 3)
+        a.start()
+        val b = ObjectAnimator.ofInt(1, 3)
+        b.start()
+        ObjectAnimator.ofInt(1, 3).start()
+        val sb: StringBuilder = StringBuilder()
+        sb.append(1)
+        StringBuilder().append(1)
+        Thread().run()
+        a.cancel()
+        b.cancel()
+    }
+
+    fun A() {
+        val v = c()
+    }
 }
+
+class c

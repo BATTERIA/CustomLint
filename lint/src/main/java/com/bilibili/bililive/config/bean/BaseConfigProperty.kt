@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 
 /**
  * lint配置基础属性
- *User: yaobeihaoyu
+ * User: yaobeihaoyu
  * Date: 2020/6/12
  * Time: 4:15 PM
  */

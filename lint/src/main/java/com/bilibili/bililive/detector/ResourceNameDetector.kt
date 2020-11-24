@@ -3,13 +3,13 @@ package com.bilibili.bililive.detector
 import com.android.SdkConstants
 import com.android.resources.ResourceFolderType
 import com.android.tools.lint.detector.api.*
-import com.bilibili.bililive.LintMatcher
+import com.bilibili.bililive.utils.LintMatcher
 import com.bilibili.bililive.config.ConfigParser
 import com.bilibili.bililive.config.LintConfig
-import com.bilibili.bililive.report
+import com.bilibili.bililive.utils.report
 
 /**
- *User: yaobeihaoyu
+ * User: yaobeihaoyu
  * Date: 2020/6/19
  * Time: 10:55 AM
  */

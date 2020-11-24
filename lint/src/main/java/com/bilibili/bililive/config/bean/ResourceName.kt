@@ -2,7 +2,7 @@ package com.bilibili.bililive.config.bean
 
 /**
  * 资源命名规范
- *User: yaobeihaoyu
+ * User: yaobeihaoyu
  * Date: 2020/6/19
  * Time: 5:06 PM
  */

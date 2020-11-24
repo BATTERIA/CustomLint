@@ -5,7 +5,7 @@ import com.android.tools.lint.detector.api.Detector
 import com.bilibili.bililive.config.LintConfig
 
 /**
- *User: yaobeihaoyu
+ * User: yaobeihaoyu
  * Date: 2020/10/27
  * Time: 8:07 PM
  */

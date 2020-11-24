@@ -8,7 +8,7 @@ import java.io.File
 
 /**
  * lint配置解析器
- *User: yaobeihaoyu
+ * User: yaobeihaoyu
  * Date: 2020/6/10
  * Time: 7:33 PM
  */

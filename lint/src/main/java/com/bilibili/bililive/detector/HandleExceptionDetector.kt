@@ -4,9 +4,9 @@ import com.android.tools.lint.client.api.UElementHandler
 import com.android.tools.lint.detector.api.*
 import com.bilibili.bililive.config.ConfigParser
 import com.bilibili.bililive.config.LintConfig
-import com.bilibili.bililive.LintMatcher
+import com.bilibili.bililive.utils.LintMatcher
 import com.bilibili.bililive.config.bean.HandleExceptionMethod
-import com.bilibili.bililive.report
+import com.bilibili.bililive.utils.report
 import org.jetbrains.uast.UCallExpression
 import org.jetbrains.uast.UElement
 import org.jetbrains.uast.UTryExpression
@@ -14,7 +14,7 @@ import org.jetbrains.uast.getParentOfType
 
 /**
  * 调用指定API时，需要加try-catch处理指定类型的异常
- *User: yaobeihaoyu
+ * User: yaobeihaoyu
  * Date: 2020/10/28
  * Time: 4:00 PM
  */

@@ -1,7 +1,7 @@
-package com.bilibili.bililive
+package com.bilibili.bililive.utils
 
 /**
- *User: yaobeihaoyu
+ * User: yaobeihaoyu
  * Date: 2020/10/29
  * Time: 10:15 AM
  */
