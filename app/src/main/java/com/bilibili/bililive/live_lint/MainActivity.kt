@@ -54,8 +54,6 @@ class CommonBean {
         sb.append(1)
         StringBuilder().append(1)
         Thread().run()
-        a.cancel()
-        b.cancel()
     }
 
     fun A() {
