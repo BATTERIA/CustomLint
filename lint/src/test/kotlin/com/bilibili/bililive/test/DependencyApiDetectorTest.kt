@@ -11,7 +11,7 @@ import com.bilibili.bililive.detector.DependencyApiDetector
  * @since: 2020/11/5 7:20 PM
  * @description:
  */
-class DetectorTest : LintDetectorTest() {
+class DependencyApiDetectorTest : LintDetectorTest() {
     override fun getDetector(): Detector {
         return DependencyApiDetector()
     }
@@ -36,30 +36,6 @@ class CommonBean {
     
     fun test() {
         a.cancel()
-    }
-}
-""")).run().expect("No warnings.")
-    }
-}
-
-class NamingDetectorTest : LintDetectorTest() {
-    override fun getDetector(): Detector {
-        return NamingConventionDetector()
-    }
-
-    override fun getIssues(): MutableList<Issue> {
-        return mutableListOf(NamingConventionDetector.ISSUE)
-    }
-
-    fun test() {
-        lint().files(kotlin("""
-import android.animation.Animator
-import android.animation.ObjectAnimator
-class c {
-    private var s: String = "abc"
-
-    fun Ger() {
-    
     }
 }
 """)).run().expect("No warnings.")

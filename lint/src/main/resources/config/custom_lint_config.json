@@ -41,25 +41,25 @@
       "trigger_method": "java.lang.StringBuilder.append",
       "dependency_method": "java.lang.StringBuilder.toString",
       "message": "StringBuilder调用append后必须调用toString",
-      "severity": "warning"
+      "severity": "informational"
     },
     {
       "trigger_method": "android.animation.Animator.start",
       "dependency_method": "android.animation.Animator.cancel",
       "message": "Animator调用start后必须调用cancel",
-      "severity": "error"
+      "severity": "informational"
     },
     {
       "trigger_method": "android.animation.ObjectAnimator.start",
       "dependency_method": "android.animation.ObjectAnimator.cancel",
       "message": "Animator调用start后必须调用cancel",
-      "severity": "error"
+      "severity": "informational"
     },
     {
       "trigger_method": "android.animation.ValueAnimator.start",
       "dependency_method": "android.animation.ValueAnimator.cancel",
       "message": "Animator调用start后必须调用cancel",
-      "severity": "error"
+      "severity": "informational"
     }
   ],
   "serializable_config": {

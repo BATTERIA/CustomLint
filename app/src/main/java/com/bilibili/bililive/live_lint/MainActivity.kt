@@ -2,10 +2,15 @@ package com.bilibili.bililive.live_lint
 
 import android.animation.Animator
 import android.animation.ObjectAnimator
+import android.annotation.SuppressLint
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import com.bilibili.bililive.videoliveplayer.ui.roomv3.base.TestEvent
+import com.bilibili.bililive.videoliveplayer.ui.roomv3.base.events.bussiness.BattleInfoEvent
+import com.bilibili.bililive.videoliveplayer.ui.roomv3.base.rxbus.ILiveRxBusManager
+import com.bilibili.bililive.videoliveplayer.ui.roomv3.base.rxbus.LiveRxBusManager
 import java.io.Serializable
 import java.lang.StringBuilder
 
@@ -54,6 +59,13 @@ class CommonBean {
         sb.append(1)
         StringBuilder().append(1)
         Thread().run()
+        val manager: ILiveRxBusManager = LiveRxBusManager()
+        manager.postEvent(TestEvent())
+        val e = TestEvent()
+        manager.postEvent(e)
+        manager.postEvent(BattleInfoEvent())
+        val e2 = BattleInfoEvent()
+        manager.postEvent(e2)
     }
 
     fun A() {

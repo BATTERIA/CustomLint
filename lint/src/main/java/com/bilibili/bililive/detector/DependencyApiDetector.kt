@@ -32,9 +32,9 @@ class DependencyApiDetector : BaseDetector(), Detector.UastScanner, Logger {
             "DependencyApiCheck",
             REPORT_MESSAGE,
             REPORT_MESSAGE,
-            Category.CORRECTNESS,
-            10,
-            Severity.ERROR,
+            Category.TESTING,
+            5,
+            Severity.INFORMATIONAL,
             Implementation(DependencyApiDetector::class.java, Scope.JAVA_FILE_SCOPE)
         )
     }
@@ -54,8 +54,8 @@ class DependencyApiDetector : BaseDetector(), Detector.UastScanner, Logger {
 
                 // 拿到方法调用对象名
                 val objectName = node.getReferenceObjectName()
-                if (objectName.isEmpty()) logError("can't get object's name")
-                logInfo("found triggerMethod(${dependencyApi.triggerMethod}) and object's name is $objectName")
+//                if (objectName.isEmpty()) logError("can't get object's name")
+//                logInfo("found triggerMethod(${dependencyApi.triggerMethod}) and object's name is $objectName")
 
                 // 拿到外层类
                 val outClass =
@@ -66,10 +66,10 @@ class DependencyApiDetector : BaseDetector(), Detector.UastScanner, Logger {
                 outClass.accept(dependencyApiFinder)//检查outMethod内是否有调用dependency_method
 
                 if (dependencyApiFinder.isFound()) {
-                    logInfo("found dependencyMethod(${dependencyApi.dependencyMethod}) and object's name is $objectName")
+//                    logInfo("found dependencyMethod(${dependencyApi.dependencyMethod}) and object's name is $objectName")
                     return
                 }
-                logError("调用${dependencyApi.triggerMethod}后必须调用${dependencyApi.dependencyMethod}方法")
+//                logError("调用${dependencyApi.triggerMethod}后必须调用${dependencyApi.dependencyMethod}方法")
                 context.report(ISSUE, context.getLocation(node), dependencyApi)
             }
 

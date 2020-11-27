@@ -31,19 +31,21 @@ fun UCallExpression.getReferenceObjectName(): String {
 fun Context.report(
     issue: Issue,
     location: Location,
-    baseProperty: BaseConfigProperty
+    baseProperty: BaseConfigProperty?,
+    msg: String = ""
 ) {
+    val msg = "livelint: ${baseProperty?.message ?: msg}"
     this.report(
         Issue.create(
             issue.id,
-            baseProperty.message,
+            msg,
             issue.getExplanation(TextFormat.TEXT),
             issue.category,
             issue.priority,
-            baseProperty.lintSeverity,
+            baseProperty?.lintSeverity ?: Severity.INFORMATIONAL,
             issue.implementation
         ),
         location,
-        baseProperty.message
+        msg
     )
 }

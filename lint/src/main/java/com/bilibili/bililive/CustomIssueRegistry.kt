@@ -13,7 +13,8 @@ class CustomIssueRegistry : IssueRegistry() {
 
     override val issues: List<Issue>
         get() = listOf(
-            DependencyApiDetector.ISSUE
+            DependencyApiDetector.ISSUE,
+            RxBusEventDetector.ISSUE
 //            SerializableClassDetector.ISSUE,
 //            HandleExceptionDetector.ISSUE,
 //            AvoidUsageApiDetector.ISSUE,
