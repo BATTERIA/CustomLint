@@ -58,4 +58,12 @@ class LintConfig private constructor(context: Context) {
     val serializableConfig by lazy {
         parser.getSerializableConfig()
     }
+
+    /**
+     * LiveRoomDataStore写规范
+     * 读取所有涉及的类型
+     */
+    val dataStoreWriteConfig by lazy {
+        parser.getDataStoreWriteConfig()
+    }
 }

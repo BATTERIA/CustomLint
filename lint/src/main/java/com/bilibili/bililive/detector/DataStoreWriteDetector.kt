@@ -25,9 +25,6 @@ class DataStoreWriteDetector : BaseDetector(), Detector.UastScanner {
         )
 
         private const val TAG = "DataStoreWriteDetector"
-        private val classNames = listOf(
-            "com.bilibili.bililive.Test"
-        )
     }
 
     override fun getApplicableUastTypes(): List<Class<out UElement>>? {
@@ -42,16 +39,32 @@ class DataStoreWriteDetector : BaseDetector(), Detector.UastScanner {
             override fun visitBinaryExpression(node: UBinaryExpression) {
                 if (node.operator != UastBinaryOperator.ASSIGN) return
                 val left = node.leftOperand as? UQualifiedReferenceExpression ?: return
-                // 只观察上一级的receiver的类型是否符合目标类
-                val receiver = left.receiver as? UReferenceExpression ?: return
-                // 类型名
-                val className = receiver.getClassName()
+                // 只观察上面某级的receiver的类型是否符合目标类
+                var receiver: UReferenceExpression? = left.receiver as? UReferenceExpression
+                while (receiver != null) {
+                    // 类型名
+                    val className = receiver.getClassName()
 //                logInfo("className: $className")
-                if (classNames.contains(className)) report(node)
+                    val classes = lintConfig.dataStoreWriteConfig.classes
+                    if (classes.contains(className)) {
+                        report(node)
+                        return
+                    }
+                    if (receiver is UQualifiedReferenceExpression) {
+                        receiver = receiver.receiver as? UReferenceExpression
+                        continue
+                    }
+                    return
+                }
             }
 
             private fun report(node: UElement) {
-                context.report(DependencyApiDetector.ISSUE, context.getLocation(node), null, explanation)
+                context.report(
+                    DependencyApiDetector.ISSUE,
+                    context.getLocation(node),
+                    null,
+                    explanation
+                )
             }
 
             override val tag: String

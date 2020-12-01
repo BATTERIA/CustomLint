@@ -66,5 +66,10 @@
     "name_regex": "^(com\\.rocketzly\\.checks|com\\.rocketzly\\.androidlint)",
     "message": "该对象必须要实现Serializable接口，因为外部类实现了Serializable接口",
     "severity": "warning"
+  },
+  "data_store_write": {
+    "classes": [
+      "com.bilibili.bililive.Test"
+    ]
   }
 }

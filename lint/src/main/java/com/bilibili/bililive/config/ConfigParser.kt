@@ -22,6 +22,7 @@ class ConfigParser {
         const val KEY_DEPENDENCY_API = "dependency_api"
         const val KEY_RESOURCE_NAME = "resource_name"
         const val KEY_SERIALIZABLE_CONFIG = "serializable_config"
+        const val KEY_DATA_STORE_WRITE = "data_store_write"
     }
 
     init {
@@ -62,5 +63,12 @@ class ConfigParser {
             configJson.getAsJsonObject(KEY_SERIALIZABLE_CONFIG),
             object : TypeToken<BaseConfigProperty>() {}.type
         ) ?: BaseConfigProperty()
+    }
+
+    fun getDataStoreWriteConfig(): DataStoreMemberClasses {
+        return Gson().fromJson(
+            configJson.getAsJsonObject(KEY_DATA_STORE_WRITE),
+            object : TypeToken<DataStoreMemberClasses>() {}.type
+        ) ?: DataStoreMemberClasses()
     }
 }
