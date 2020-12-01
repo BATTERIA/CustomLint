@@ -2,9 +2,11 @@ package com.bilibili.bililive.utils
 
 import com.android.tools.lint.detector.api.*
 import com.bilibili.bililive.config.bean.BaseConfigProperty
+import com.intellij.psi.impl.source.PsiClassReferenceType
 import org.jetbrains.uast.UCallExpression
 import org.jetbrains.uast.UIdentifier
 import org.jetbrains.uast.UReferenceExpression
+import org.jetbrains.uast.getContainingClass
 
 /**
  * User: yaobeihaoyu
@@ -26,6 +28,13 @@ fun UCallExpression.getQualifiedName(): String {
  */
 fun UCallExpression.getReferenceObjectName(): String {
     return ((receiver as? UReferenceExpression)?.referenceNameElement as? UIdentifier)?.name ?: ""
+}
+
+/**
+ * 获取引用的类名
+ */
+fun UReferenceExpression.getClassName(): String {
+    return (getExpressionType() as? PsiClassReferenceType)?.reference?.qualifiedName ?: ""
 }
 
 fun Context.report(

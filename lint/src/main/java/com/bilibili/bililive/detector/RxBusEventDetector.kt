@@ -43,7 +43,6 @@ class RxBusEventDetector : BaseDetector(), Detector.UastScanner {
     override fun createUastHandler(context: JavaContext): UElementHandler? {
         return object : UElementHandler() {
             override fun visitCallExpression(node: UCallExpression) {
-                val test = node.getQualifiedName()
                 // 非post方法return
                 postEventMethods.find {
                     LintMatcher.match(null, it, node.getQualifiedName())

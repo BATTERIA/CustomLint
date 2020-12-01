@@ -34,6 +34,7 @@ android {
 //        check checkList
         informational 'DependencyApiCheck'
         informational 'RxBusEventCheck'
+        informational 'DataStoreWriteCheck'
         abortOnError false
     }
 }
