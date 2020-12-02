@@ -13,7 +13,7 @@ import org.jetbrains.uast.*
  */
 class DataStoreWriteDetector : BaseDetector(), Detector.UastScanner {
     companion object {
-        private const val explanation = "LiveRoomDataStore内所有变量都需要通过write方法进行写操作"
+        private const val explanation = "LiveRoomDataStore内所有变量都需要通过LiveRoomDataStoreManager.writeDataStoreValueByKey方法进行写操作"
         val ISSUE = Issue.create(
             "DataStoreWriteCheck",
             "LiveRoomDataStore写规范",
@@ -60,7 +60,7 @@ class DataStoreWriteDetector : BaseDetector(), Detector.UastScanner {
 
             private fun report(node: UElement) {
                 context.report(
-                    DependencyApiDetector.ISSUE,
+                    ISSUE,
                     context.getLocation(node),
                     null,
                     explanation

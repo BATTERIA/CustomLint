@@ -68,7 +68,7 @@ class RxBusEventDetector : BaseDetector(), Detector.UastScanner {
             }
 
             private fun report(node: UCallExpression) {
-                context.report(DependencyApiDetector.ISSUE, context.getLocation(node), null, explanation)
+                context.report(ISSUE, context.getLocation(node), null, explanation)
             }
         }
     }
