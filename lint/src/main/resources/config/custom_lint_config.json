@@ -69,7 +69,7 @@
   },
   "data_store_write": {
     "classes": [
-      "com.bilibili.bililive.Test"
+      "com.bubble.lint.Test"
     ]
   }
 }

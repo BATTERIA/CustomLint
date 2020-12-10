@@ -7,7 +7,7 @@ android {
     buildToolsVersion "29.0.3"
 
     defaultConfig {
-        applicationId "com.bilibili.bililive.live_lint"
+        applicationId "com.bubble.lint.live_lint"
         minSdkVersion 14
         targetSdkVersion 30
         versionCode 1
@@ -24,14 +24,14 @@ android {
     }
 
     lintOptions {
-//        def checkList = [
-//                'SerializableClassCheck',
-//                'HandleExceptionCheck',
-//                'AvoidUsageApiCheck',
-//                'DependencyApiCheck',
-//                'ResourceNameCheck'
-//        ] as String[]
-//        check checkList
+        def checkList = [
+                'SerializableClassCheck',
+                'HandleExceptionCheck',
+                'AvoidUsageApiCheck',
+                'DependencyApiCheck',
+                'ResourceNameCheck'
+        ] as String[]
+        check checkList
         informational 'DependencyApiCheck'
         informational 'RxBusEventCheck'
         informational 'DataStoreWriteCheck'

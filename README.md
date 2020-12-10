@@ -1,4 +1,12 @@
-## 直播lint检查工具仓库
+## Custom Lint Check
+
+### 使用方法一
+
+自定义lint检查代码都在lint模块（Java Module）中；lintlibrary是一个空的Android Module，负责将livelint打出的jar包打入一个aar包中。
+
+app模块通过compileOnly依赖livelibrary模块，相关的自定义检测就会只对该模块生效了，并且不会打入release包中。
+
+### 使用方法二
 
 编译完成后，将"/lint/build/libs"的"lint.jar"文件复制到（mac下）".android/lint"目录下（没有lint目录，新建一个）即可。</br>
 
